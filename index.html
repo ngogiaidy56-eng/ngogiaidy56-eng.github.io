@@ -47,8 +47,7 @@
         .support-card.active { border-color: #ffaa00; }
         .support-card.blue { border-color: #00e5ff; }
         .card-number { position: absolute; top: 12px; right: 12px; width: 24px; height: 24px; background: #ffaa00; color: #000; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 12px; }
-        .support-card.blue .card-number { background: #00e5ff; }
-        .card-number.green { background: #00ff66; }
+        .support-card.blue .card-number { background: #00ff66; }
         .support-card h4 { font-size: 14px; margin-bottom: 8px; }
         .support-card p { font-size: 11px; color: #aaa; line-height: 1.4; }
 
@@ -95,7 +94,7 @@
                 </div>
             </div>
             <div class="profile-right">
-                <div class="wallet-item">VÍ CHÍNH (NẠP): <span>5,500đ</span></div>
+                <div class="wallet-item">VÍ CHÍNH (NẠP): <span id="web-balance">5,500đ</span></div>
                 <div class="wallet-item voucher">VÍ VOUCHER: <span>0đ</span></div>
             </div>
         </div>
@@ -114,7 +113,7 @@
                 <p>Tất cả vấn đề thắc mắc, khiếu nại, cần hỗ trợ khác vui lòng sử dụng tính năng Gửi Ticket này để được CSKH xử lý.</p>
             </div>
             <div class="support-card blue">
-                <div class="card-number green">3</div>
+                <div class="card-number" style="background: #00ff66; color: #000;">3</div>
                 <h4>VOUCHER 72H</h4>
                 <p>Yêu cầu nhận Voucher đền bù cho đơn hàng quá 72 giờ vẫn chưa HOÀN TẤT. Tặng ngay Voucher 100% giá trị đơn đó.</p>
             </div>
@@ -164,5 +163,23 @@
             <button class="nav-btn">🛒 GĐ ĐƠN HÀNG</button>
         </div>
     </div>
+
+    <script>
+        // Tự động nhận diện thông tin cá nhân hóa từ Bot Telegram truyền sang
+        const urlParams = new URLSearchParams(window.location.search);
+        const name = urlParams.get('name');
+        const id = urlParams.get('id');
+        const balance = urlParams.get('balance');
+
+        if (name) {
+            document.querySelector('.user-info h3').innerText = '@' + decodeURIComponent(name);
+        }
+        if (id) {
+            document.querySelector('.badge-id').innerText = '🆔 ID: ' + id;
+        }
+        if (balance) {
+            document.getElementById('web-balance').innerText = Number(balance).toLocaleString() + 'đ';
+        }
+    </script>
 </body>
 </html>
